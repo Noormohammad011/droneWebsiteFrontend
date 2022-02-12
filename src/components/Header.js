@@ -1,8 +1,16 @@
 import React from 'react'
-import { Link,NavLink } from 'react-router-dom'
-
+import { Link, NavLink } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../actions/userActions'
 
 const Header = () => {
+  const dispatch = useDispatch()
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+  const logoutHandler = (e) => {
+    e.preventDefault()
+    dispatch(logout())
+  }
   return (
     <header>
       <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
@@ -42,17 +50,69 @@ const Header = () => {
                   <i className='fas fa-shopping-cart mx-1'></i>Cart
                 </NavLink>
               </li>
-              <li className='nav-item'>
-                <NavLink
-                  to='/login'
-                  className={({ isActive }) =>
-                    isActive ? 'nav-link active' : 'nav-link'
-                  }
-                  aria-current='page'
-                >
-                  <i className='fas fa-user mx-1'></i> Login
-                </NavLink>
-              </li>
+              {userInfo ? (
+                <>
+                  <li className='nav-item dropdown'>
+                    <a
+                      className='nav-link dropdown-toggle'
+                      id='navbarDropdown'
+                      role='button'
+                      data-bs-toggle='dropdown'
+                      aria-expanded='false'
+                    >
+                      {userInfo.name}
+                    </a>
+                    <ul
+                      className='dropdown-menu'
+                      aria-labelledby='navbarDropdown'
+                    >
+                      <li className='nav-item'>
+                        <Link
+                          to='/profile'
+                          type='button'
+                          className='btn btn-outline-primary dropdown-item text-center'
+                        >
+                          Profile
+                        </Link>
+                      </li>
+                      <li className='nav-item'>
+                        <button
+                          type='button'
+                          className='btn btn-outline-danger dropdown-item text-center'
+                          onClick={logoutHandler}
+                        >
+                          Logout
+                        </button>
+                      </li>
+                    </ul>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className='nav-item'>
+                    <NavLink
+                      to='/register'
+                      className={({ isActive }) =>
+                        isActive ? 'nav-link active' : 'nav-link'
+                      }
+                      aria-current='page'
+                    >
+                      Register
+                    </NavLink>
+                  </li>
+                  <li className='nav-item'>
+                    <NavLink
+                      to='/login'
+                      className={({ isActive }) =>
+                        isActive ? 'nav-link active' : 'nav-link'
+                      }
+                      aria-current='page'
+                    >
+                     Login
+                    </NavLink>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>
