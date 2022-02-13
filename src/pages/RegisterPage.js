@@ -21,7 +21,7 @@ const RegisterPage = () => {
   const userRegister = useSelector((state) => state.userRegister)
   const { loading, error, userInfo } = userRegister
 
-  const redirect = location.search ? location.search.split('=')[1] : '/'
+  const redirect = location?.state?.from || '/'
 
   useEffect(() => {
     if (userInfo) {
