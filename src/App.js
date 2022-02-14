@@ -11,6 +11,10 @@ import RegisterPage from './pages/RegisterPage'
 import ProfilePage from './pages/ProfilePage'
 import ShippingPage from './pages/ShippingPage'
 import PrivateRoute from './privateRoute/PrivateRoute'
+import PaymentPage from './pages/PaymentPage'
+import OrderPlacePage from './pages/OrderPlacePage';
+import OrderPage from './pages/OrderPage';
+import NotFoundPage from './pages/NotFoundPage'
 
 const App = () => {
   return (
@@ -33,6 +37,38 @@ const App = () => {
                 </PrivateRoute>
               }
             />
+            <Route
+              path='/payment'
+              element={
+                <PrivateRoute>
+                  <PaymentPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/placeorder'
+              element={
+                <PrivateRoute>
+                  <OrderPlacePage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/order/:id'
+              element={
+                <PrivateRoute>
+                  <OrderPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/admin/userlist'
+              element={
+                <PrivateRoute>
+                  <UserListPage />
+                </PrivateRoute>
+              }
+            />
 
             {/* 
             <Route path='/cart/:id' element={<CartPage />} />
@@ -42,6 +78,7 @@ const App = () => {
               <Route path=':id' element={<CartPage />} />
               <Route path='' element={<CartPage />} />
             </Route>
+            <Route path='*' element={<NotFoundPage />} />
           </Routes>
         </Container>
       </main>

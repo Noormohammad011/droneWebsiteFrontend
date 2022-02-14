@@ -26,7 +26,7 @@ import {
   USER_UPDATE_FAIL,
 } from '../constants/userConstants'
 
-// import { ORDER_LIST_MY_RESET } from '../constants/orderConstatns'
+import { ORDER_LIST_MY_RESET } from '../constants/orderConstatns'
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -41,7 +41,7 @@ export const login = (email, password) => async (dispatch) => {
     }
 
     const { data } = await axios.post(
-      'http://localhost:5000/api/users/login',
+      'https://gentle-oasis-76580.herokuapp.com/api/users/login',
       { email, password },
       config
     )
@@ -66,12 +66,12 @@ export const login = (email, password) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   localStorage.removeItem('userInfo')
   localStorage.removeItem('cartItems')
-  // localStorage.removeItem('shippingAddress')
-  // localStorage.removeItem('paymentMethod')
+  localStorage.removeItem('shippingAddress')
+  localStorage.removeItem('paymentMethod')
   dispatch({ type: USER_LOGOUT })
-  // dispatch({ type: USER_DETAILS_RESET })
-  // dispatch({ type: ORDER_LIST_MY_RESET })
-  // dispatch({ type: USER_LIST_RESET })
+  dispatch({ type: USER_DETAILS_RESET })
+  dispatch({ type: ORDER_LIST_MY_RESET })
+  dispatch({ type: USER_LIST_RESET })
   document.location.href = '/login'
 }
 
@@ -88,7 +88,7 @@ export const register = (name, email, password) => async (dispatch) => {
     }
 
     const { data } = await axios.post(
-      'http://localhost:5000/api/users',
+      'https://gentle-oasis-76580.herokuapp.com/api/users',
       { name, email, password },
       config
     )
@@ -132,7 +132,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.get(
-      `http://localhost:5000/api/users/${id}`,
+      `https://gentle-oasis-76580.herokuapp.com/api/users/${id}`,
       config
     )
 
@@ -169,7 +169,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.put(
-      `http://localhost:5000/api/users/profile`,
+      `https://gentle-oasis-76580.herokuapp.com/api/users/profile`,
       user,
       config
     )
@@ -215,7 +215,10 @@ export const listUsers = () => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.get(`http://localhost:5000/api/users`, config)
+    const { data } = await axios.get(
+      `https://gentle-oasis-76580.herokuapp.com/api/users`,
+      config
+    )
 
     dispatch({
       type: USER_LIST_SUCCESS,
@@ -249,7 +252,10 @@ export const deleteUser = (id) => async (dispatch, getState) => {
       },
     }
 
-    await axios.delete(`http://localhost:5000/api/users/${id}`, config)
+    await axios.delete(
+      `https://gentle-oasis-76580.herokuapp.com/api/users/${id}`,
+      config
+    )
 
     dispatch({
       type: USER_DELETE_SUCCESS,
@@ -283,7 +289,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.put(
-      `http://localhost:5000/api/users/${user._id}`,
+      `https://gentle-oasis-76580.herokuapp.com/api/users/${user._id}`,
       user,
       config
     )

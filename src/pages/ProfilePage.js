@@ -5,7 +5,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom'
+import { myListOrder } from '../actions/orderActions'
+
 const ProfilePage = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -13,29 +15,30 @@ const ProfilePage = () => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [message, setMessage] = useState(null)
   const navigate = useNavigate()
-  const location = useLocation()
 
-    const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-    const userDetails = useSelector((state) => state.userDetails)
+  const userDetails = useSelector((state) => state.userDetails)
   const { loading, error, user } = userDetails
-   const userLogin = useSelector((state) => state.userLogin)
-   const { userInfo } = userLogin
-   const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+  const orderMyList = useSelector((state) => state.orderMyList)
+  const { loading: loadingOrders, error: errorOrders, orders } = orderMyList
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
   const { success } = userUpdateProfile
-   useEffect(() => {
-     if (!userInfo) {
-       navigate('/login')
-     } else {
-       if (!user.name) {
-         dispatch(getUserDetails('profile'))
-        //  dispatch(myListOrder())
-       } else {
-         setName(user.name)
-         setEmail(user.email)
-       }
-     }
-   }, [navigate, userInfo, dispatch, user])
+  useEffect(() => {
+    if (!userInfo) {
+      navigate('/login')
+    } else {
+      if (!user.name || !orders) {
+        dispatch(getUserDetails('profile'))
+        dispatch(myListOrder())
+      } else {
+        setName(user.name)
+        setEmail(user.email)
+      }
+    }
+  }, [navigate, userInfo, dispatch, user, orders])
   const submitHandler = (e) => {
     e.preventDefault()
     if (password !== confirmPassword) {
@@ -44,8 +47,6 @@ const ProfilePage = () => {
       dispatch(updateUserProfile({ id: user._id, name, email, password }))
     }
   }
-  
-  
 
   return (
     <Row>
@@ -102,7 +103,7 @@ const ProfilePage = () => {
           </Button>
         </Form>
       </Col>
-      {/* <Col md={9}>
+      <Col md={9}>
         <h2>My Orders</h2>
         {loadingOrders ? (
           <Loader />
@@ -152,7 +153,7 @@ const ProfilePage = () => {
             </tbody>
           </Table>
         )}
-      </Col> */}
+      </Col>
     </Row>
   )
 }
