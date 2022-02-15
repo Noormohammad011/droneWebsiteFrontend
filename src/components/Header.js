@@ -108,10 +108,58 @@ const Header = () => {
                       }
                       aria-current='page'
                     >
-                     Login
+                      Login
                     </NavLink>
                   </li>
                 </>
+              )}
+              {userInfo && userInfo.isAdmin && (
+                <li className='nav-item dropdown mx-2'>
+                  <a
+                    className='nav-link dropdown-toggle'
+                    id='navbarDropdown'
+                    role='button'
+                    data-bs-toggle='dropdown'
+                    aria-expanded='false'
+                  >
+                    Admin
+                  </a>
+                  <ul
+                    className='dropdown-menu'
+                    aria-labelledby='navbarDropdown'
+                  >
+                    <li className='nav-item'>
+                      <Link
+                        to='/admin/userlist'
+                        type='button'
+                        data-mdb-ripple='true'
+                        className='btn btn-outline-primary dropdown-item text-center'
+                      >
+                        User List
+                      </Link>
+                    </li>
+                    {/* <li className='nav-item'>
+                      <Link
+                        to='/admin/carlist'
+                        type='button'
+                        data-mdb-ripple='true'
+                        className='btn btn-outline-primary dropdown-item text-center'
+                      >
+                        Car List
+                      </Link>
+                    </li>
+                    <li className='nav-item'>
+                      <Link
+                        to='/admin/bokingList'
+                        type='button'
+                        data-mdb-ripple='true'
+                        className='btn btn-outline-primary dropdown-item text-center'
+                      >
+                        Booking List
+                      </Link>
+                    </li> */}
+                  </ul>
+                </li>
               )}
             </ul>
           </div>

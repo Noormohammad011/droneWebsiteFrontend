@@ -16,6 +16,7 @@ import OrderPlacePage from './pages/OrderPlacePage';
 import OrderPage from './pages/OrderPage';
 import NotFoundPage from './pages/NotFoundPage'
 import UserListPage from './pages/UserListPage'
+import UserEditPage from './pages/UserEditPage'
 
 
 const App = () => {
@@ -68,6 +69,14 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <UserListPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/admin/user/:id/edit'
+              element={
+                <PrivateRoute>
+                  <UserEditPage />
                 </PrivateRoute>
               }
             />
