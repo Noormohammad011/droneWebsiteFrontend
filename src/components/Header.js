@@ -91,17 +91,6 @@ const Header = () => {
                 <>
                   <li className='nav-item'>
                     <NavLink
-                      to='/register'
-                      className={({ isActive }) =>
-                        isActive ? 'nav-link active' : 'nav-link'
-                      }
-                      aria-current='page'
-                    >
-                      Register
-                    </NavLink>
-                  </li>
-                  <li className='nav-item'>
-                    <NavLink
                       to='/login'
                       className={({ isActive }) =>
                         isActive ? 'nav-link active' : 'nav-link'
@@ -132,32 +121,29 @@ const Header = () => {
                       <Link
                         to='/admin/userlist'
                         type='button'
-                        data-mdb-ripple='true'
                         className='btn btn-outline-primary dropdown-item text-center'
                       >
                         User List
                       </Link>
                     </li>
-                    {/* <li className='nav-item'>
+                    <li className='nav-item'>
                       <Link
-                        to='/admin/carlist'
+                        to='/admin/productlist'
                         type='button'
-                        data-mdb-ripple='true'
                         className='btn btn-outline-primary dropdown-item text-center'
                       >
-                        Car List
+                        Product List
                       </Link>
                     </li>
                     <li className='nav-item'>
                       <Link
-                        to='/admin/bokingList'
+                        to='/admin/orderlist'
                         type='button'
-                        data-mdb-ripple='true'
                         className='btn btn-outline-primary dropdown-item text-center'
                       >
-                        Booking List
+                        Order List
                       </Link>
-                    </li> */}
+                    </li>
                   </ul>
                 </li>
               )}

@@ -17,6 +17,8 @@ import OrderPage from './pages/OrderPage';
 import NotFoundPage from './pages/NotFoundPage'
 import UserListPage from './pages/UserListPage'
 import UserEditPage from './pages/UserEditPage'
+import ProductListPage from './pages/ProductListPage'
+import ProductEditPage from './pages/ProductEditPage'
 
 
 const App = () => {
@@ -73,6 +75,23 @@ const App = () => {
               }
             />
             <Route
+              path='/admin/productlist'
+              element={
+                <PrivateRoute>
+                  <ProductListPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/admin/product/:id/edit'
+              element={
+                <PrivateRoute>
+                  <ProductEditPage />
+                </PrivateRoute>
+              }
+            />
+
+            <Route
               path='/admin/user/:id/edit'
               element={
                 <PrivateRoute>
@@ -80,7 +99,6 @@ const App = () => {
                 </PrivateRoute>
               }
             />
-
             {/* 
             <Route path='/cart/:id' element={<CartPage />} />
             <Route path='/cart/' element={<CartPage />} />

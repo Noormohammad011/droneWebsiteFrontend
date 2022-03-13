@@ -42,6 +42,7 @@ const UserEditPage = () => {
 
   const submitHandler = (e) => {
     e.preventDefault()
+    
 
     dispatch(updateUser({ _id: id, name, email, isAdmin }))
   }
@@ -83,14 +84,15 @@ const UserEditPage = () => {
 
             <Form.Group controlId='isAdmin'>
               <Form.Check
-                type='radio'
+                className='my-2'
+                type='checkbox'
                 label='Is Admin'
-                checked={!!isAdmin}
-                onChange={(e) => setIsAdmin(!!e.target.value)}
+                checked={isAdmin}
+                onChange={(e) => setIsAdmin(e.target.checked)}
               ></Form.Check>
             </Form.Group>
 
-            <Button type='submit' variant='primary'>
+            <Button type='submit' variant='outline-dark'>
               Update
             </Button>
           </Form>
