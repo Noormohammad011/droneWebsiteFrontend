@@ -152,7 +152,7 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.put(
-      `/api/orders/${order._id}/deliver`,
+      `https://gentle-oasis-76580.herokuapp.com/api/orders/${order._id}/deliver`,
       {},
       config
     )
@@ -226,7 +226,10 @@ export const listOrders = () => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.get(`/api/orders`, config)
+    const { data } = await axios.get(
+      `https://gentle-oasis-76580.herokuapp.com/api/orders`,
+      config
+    )
 
     dispatch({
       type: ORDER_LIST_SUCCESS,

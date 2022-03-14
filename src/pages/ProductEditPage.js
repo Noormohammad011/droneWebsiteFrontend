@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
 import FileBase from 'react-file-base64'

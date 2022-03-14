@@ -19,6 +19,7 @@ import UserListPage from './pages/UserListPage'
 import UserEditPage from './pages/UserEditPage'
 import ProductListPage from './pages/ProductListPage'
 import ProductEditPage from './pages/ProductEditPage'
+import OrderListPage from './pages/OrderListPage'
 
 
 const App = () => {
@@ -82,6 +83,7 @@ const App = () => {
                 </PrivateRoute>
               }
             />
+
             <Route
               path='/admin/product/:id/edit'
               element={
@@ -90,7 +92,14 @@ const App = () => {
                 </PrivateRoute>
               }
             />
-
+            <Route
+              path='/admin/orderlist'
+              element={
+                <PrivateRoute>
+                  <OrderListPage />
+                </PrivateRoute>
+              }
+            />
             <Route
               path='/admin/user/:id/edit'
               element={

@@ -149,14 +149,16 @@ const OrderPlacePage = () => {
                 {error && <Message variant='danger'>{error}</Message>}
               </ListGroup.Item>
               <ListGroup.Item>
-                <Button
-                  type='button'
-                  className='btn-block'
-                  disabled={cart.cartItems === 0}
-                  onClick={placeOrderHandler}
-                >
-                  Place Order
-                </Button>
+                <div className='d-grid'>
+                  <Button
+                    type='button'
+                    className='btn btn-dark'
+                    disabled={cart.cartItems === 0}
+                    onClick={placeOrderHandler}
+                  >
+                    Place Order
+                  </Button>
+                </div>
               </ListGroup.Item>
             </ListGroup>
           </Card>

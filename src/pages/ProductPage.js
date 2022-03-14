@@ -16,10 +16,8 @@ const ProductPage = () => {
   const productDetails = useSelector((state) => state.productDetails)
   const { loading, error, product } = productDetails
   useEffect(() => {
-    if (!product._id || product._id !== id) {
       dispatch(listProductDetails(id))
-    }
-  }, [dispatch, id, product._id])
+  }, [dispatch,id])
   //add to Cart handler
   const addToCartHanler = () => {
     navigate(`/cart/${id}?qty=${qty}`)

@@ -1,24 +1,32 @@
 import React, { useEffect } from 'react'
 import StripeCheckout from 'react-stripe-checkout'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { getOrderDetails, payOrder } from '../actions/orderActions'
+import {
+  getOrderDetails,
+  payOrder,
+  deliverOrder,
+} from '../actions/orderActions'
 import {
   ORDER_PAY_RESET,
-  //   ORDER_DELIVER_RESET,
+  ORDER_DELIVER_RESET,
 } from '../constants/orderConstatns'
 const OrderPage = () => {
   const { id } = useParams()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const orderDetails = useSelector((state) => state.orderDetails)
   const { order, loading, error } = orderDetails
-
   const orderPay = useSelector((state) => state.orderPay)
   const { loading: loadingPay, success: successPay } = orderPay
+  const orderDeliver = useSelector((state) => state.orderDeliver)
+  const { loading: loadingDeliver, success: successDeliver } = orderDeliver
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
   if (!loading) {
     //   Calculate prices
     const addDecimals = (num) => {
@@ -30,15 +38,22 @@ const OrderPage = () => {
     )
   }
   useEffect(() => {
-    if (!order || successPay || order._id !== id) {
+    if (!userInfo) {
+      navigate('/login')
+    }
+    if (!order || successPay || successDeliver || order._id !== id) {
       dispatch({ type: ORDER_PAY_RESET })
-      //    dispatch({ type: ORDER_DELIVER_RESET })
+      dispatch({ type: ORDER_DELIVER_RESET })
       dispatch(getOrderDetails(id))
     }
-  }, [dispatch, id, order, successPay])
+  }, [dispatch, id, successPay, successDeliver, order, userInfo, navigate])
 
   const successPaymentHandler = (token) => {
     dispatch(payOrder(id, token, order.totalPrice))
+  }
+
+  const deliverHandler = () => {
+    dispatch(deliverOrder(order))
   }
 
   return loading ? (
@@ -169,21 +184,23 @@ const OrderPage = () => {
                   </StripeCheckout>
                 </ListGroup.Item>
               )}
-              {/* {loadingDeliver && <Loader />}
+              {loadingDeliver && <Loader />}
               {userInfo &&
                 userInfo.isAdmin &&
                 order.isPaid &&
                 !order.isDelivered && (
                   <ListGroup.Item>
-                    <Button
-                      type='button'
-                      className='btn btn-block'
-                      onClick={deliverHandler}
-                    >
-                      Mark As Delivered
-                    </Button>
+                    <div className='d-grid'>
+                      <Button
+                        type='button'
+                        className='btn btn-dark'
+                        onClick={deliverHandler}
+                      >
+                        Mark As Delivered
+                      </Button>
+                    </div>
                   </ListGroup.Item>
-                )} */}
+                )}
             </ListGroup>
           </Card>
         </Col>
