@@ -8,7 +8,7 @@ import {
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
   const { data } = await axios.get(
-    `https://gentle-oasis-76580.herokuapp.com/api/products/${id}`
+    `${process.env.REACT_APP_BACKEND_URL}/api/products/${id}`
   )
 
   dispatch({

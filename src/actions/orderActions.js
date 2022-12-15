@@ -38,7 +38,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.post(
-      `https://gentle-oasis-76580.herokuapp.com/api/orders`,
+      `${process.env.REACT_APP_BACKEND_URL}/api/orders`,
       order,
       config
     )
@@ -76,7 +76,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.get(
-      `https://gentle-oasis-76580.herokuapp.com/api/orders/${id}`,
+      `${process.env.REACT_APP_BACKEND_URL}/api/orders/${id}`,
       config
     )
 
@@ -114,7 +114,7 @@ export const payOrder =
       }
 
       const { data } = await axios.put(
-        `https://gentle-oasis-76580.herokuapp.com/api/orders/${id}/pay`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/orders/${id}/pay`,
         { stripeToken, totalPrice },
         config
       )
@@ -152,7 +152,7 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.put(
-      `https://gentle-oasis-76580.herokuapp.com/api/orders/${order._id}/deliver`,
+      `${process.env.REACT_APP_BACKEND_URL}/api/orders/${order._id}/deliver`,
       {},
       config
     )
@@ -190,7 +190,7 @@ export const myListOrder = () => async (dispatch, getState) => {
     }
 
     const { data } = await axios.get(
-      `https://gentle-oasis-76580.herokuapp.com/api/orders/myorders`,
+      `${process.env.REACT_APP_BACKEND_URL}/api/orders/myorders`,
       config
     )
     
@@ -227,7 +227,7 @@ export const listOrders = () => async (dispatch, getState) => {
     }
 
     const { data } = await axios.get(
-      `https://gentle-oasis-76580.herokuapp.com/api/orders`,
+      `${process.env.REACT_APP_BACKEND_URL}/api/orders`,
       config
     )
 

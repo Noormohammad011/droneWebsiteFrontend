@@ -21,7 +21,7 @@ export const listProducts = () => async (dispatch) => {
     dispatch({ type: PRODUCT_LIST_REQUEST })
 
     const { data } = await axios.get(
-      `https://gentle-oasis-76580.herokuapp.com/api/products/`
+      `${process.env.REACT_APP_BACKEND_URL}/api/products/`
     )
 
     dispatch({
@@ -44,7 +44,7 @@ export const listProductDetails = (id) => async (dispatch) => {
     dispatch({ type: PRODUCT_DETAILS_REQUEST })
 
     const { data } = await axios.get(
-      `https://gentle-oasis-76580.herokuapp.com/api/products/${id}`
+      `${process.env.REACT_APP_BACKEND_URL}/api/products/${id}`
     )
 
     dispatch({
@@ -83,7 +83,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
     }
 
     await axios.delete(
-      `https://gentle-oasis-76580.herokuapp.com/api/products/${id}`,
+      `${process.env.REACT_APP_BACKEND_URL}/api/products/${id}`,
       config
     )
 
@@ -120,7 +120,7 @@ export const createProduct = () => async (dispatch, getState) => {
     }
 
     const { data } = await axios.post(
-      `https://gentle-oasis-76580.herokuapp.com/api/products/`,
+      `${process.env.REACT_APP_BACKEND_URL}/api/products/`,
       {},
       config
     )
@@ -159,7 +159,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.put(
-      `https://gentle-oasis-76580.herokuapp.com/api/products/${product._id}`,
+      `${process.env.REACT_APP_BACKEND_URL}/api/products/${product._id}`,
       product,
       config
     )
