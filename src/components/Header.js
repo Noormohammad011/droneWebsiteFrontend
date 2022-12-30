@@ -54,7 +54,7 @@ const Header = () => {
                 <>
                   <li className='nav-item dropdown'>
                     
-                    <a
+                    <span
                       className='nav-link dropdown-toggle'
                       id='navbarDropdown'
                       role='button'
@@ -62,7 +62,7 @@ const Header = () => {
                       aria-expanded='false'
                     >
                       {userInfo.name}
-                    </a>
+                    </span>
                     <ul
                       className='dropdown-menu'
                       aria-labelledby='navbarDropdown'
@@ -106,7 +106,7 @@ const Header = () => {
               {userInfo && userInfo.isAdmin && (
                 <li className='nav-item dropdown mx-2'>
                 
-                  <a
+                  <span
                     className='nav-link dropdown-toggle'
                     id='navbarDropdown'
                     role='button'
@@ -114,7 +114,7 @@ const Header = () => {
                     aria-expanded='false'
                   >
                     Admin
-                  </a>
+                  </span>
                   <ul
                     className='dropdown-menu'
                     aria-labelledby='navbarDropdown'
